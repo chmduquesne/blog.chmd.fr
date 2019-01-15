@@ -5,13 +5,8 @@
     <meta charset="utf-8" />
     <link href="http://blog.chmd.fr/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Ch-M.D Full Atom Feed" />
     <link href="http://blog.chmd.fr/feeds/misc.atom.xml" type="application/atom+xml" rel="alternate" title="Ch-M.D Categories Atom Feed" />
-    <!-- hack to have the css in a relative path -->
-    <!--
-    <link rel="stylesheet" href="http://blog.chmd.fr/theme/css/rdark.css" />
-    <link rel="stylesheet" type="text/css" href="http://blog.chmd.fr/theme/css/main.css" />
-    -->
-    <link rel="stylesheet" href="/theme/css/rdark.css" />
-    <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
+    <link rel="stylesheet" href="theme/css/rdark.css" />
+    <link rel="stylesheet" type="text/css" href="theme/css/main.css" />
 </head>
 
 <body id="index" class="home">
@@ -31,12 +26,12 @@
     <p>Comme promis dans le dernier billet, voici comment on fait pour
 extraire une scène d'un film, par exemple pour en faire un fichier
 .gif (cf post précédent)... Pour cela vous utiliserez mencoder :</p>
-<div class="highlight"><pre><span></span>sudo apt-get install mencoder
+<div class="highlight"><pre>sudo apt-get install mencoder
 </pre></div>
 
 
 <p>Et la syntaxe est la suivante :</p>
-<div class="highlight"><pre><span></span>mencoder -ss     h:mm:ss    \
+<div class="highlight"><pre>mencoder -ss     h:mm:ss    \
          -endpos h:mm:ss    \
          film_origine.avi   \
          -o extrait.avi     \

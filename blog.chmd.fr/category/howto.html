@@ -5,13 +5,8 @@
     <meta charset="utf-8" />
     <link href="http://blog.chmd.fr/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Ch-M.D Full Atom Feed" />
     <link href="http://blog.chmd.fr/feeds/howto.atom.xml" type="application/atom+xml" rel="alternate" title="Ch-M.D Categories Atom Feed" />
-    <!-- hack to have the css in a relative path -->
-    <!--
-    <link rel="stylesheet" href="http://blog.chmd.fr/theme/css/rdark.css" />
-    <link rel="stylesheet" type="text/css" href="http://blog.chmd.fr/theme/css/main.css" />
-    -->
-    <link rel="stylesheet" href="/theme/css/rdark.css" />
-    <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
+    <link rel="stylesheet" href="theme/css/rdark.css" />
+    <link rel="stylesheet" type="text/css" href="theme/css/main.css" />
 </head>
 
 <body id="index" class="home">
@@ -22,7 +17,7 @@
 <h2>Articles in the howto category</h2>
 
                 <header>
-                    <h1><a href="http://blog.chmd.fr/looping-simultaneously-over-multiple-lists-in-legacy-shells.html"
+                    <h1><a href="looping-simultaneously-over-multiple-lists-in-legacy-shells.html"
                             id="page-title">Looping simultaneously over multiple lists in legacy shells</a></h1>
                         <time datetime="2018-05-30T23:11:00+02:00">Wed 30 May 2018</time>
                 </header>
@@ -40,7 +35,7 @@ arbitrary set of lists as an argument, and returns an iterator of tuples,
 such that the first tuple is composed of the first element of each list,
 the second tuple has the second element of each list, and so on. It always
 goes better with an example:</p>
-<div class="highlight"><pre><span></span>&gt;&gt;&gt; for t in zip([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;], [1, 2, 3, 4], [&#39;!&#39;, &#39;@&#39;, &#39;#&#39;, &#39;%&#39;]):
+<div class="highlight"><pre>&gt;&gt;&gt; for t in zip([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;], [1, 2, 3, 4], [&#39;!&#39;, &#39;@&#39;, &#39;#&#39;, &#39;%&#39;]):
 ...     print(t)
 ...
 (&#39;a&#39;, 1, &#39;!&#39;)
@@ -59,7 +54,7 @@ and return a flattened list of tuples, where the iᵗʰ tuple is composed of
 all of the iᵗʰ elements of each list. Like in python, if the lists
 provided as arguments are not of equal lengths, the result will be cut at
 the shortest length. Here are examples of expected behaviour:</p>
-<div class="highlight"><pre><span></span># 3 lists of same length
+<div class="highlight"><pre># 3 lists of same length
 $ zip &quot;a b c d&quot; &quot;1 2 3 4&quot; &quot;! @ # %&quot;
  a 1 !
  b 2 @
@@ -84,12 +79,12 @@ $ zip
 
 
 <p>How to use it would then just be a matter of using the set builtin:</p>
-<div class="highlight"><pre><span></span>$ <span class="nv">list1</span><span class="o">=</span><span class="s2">&quot;1 2 3 4&quot;</span>
+<div class="highlight"><pre>$ <span class="nv">list1</span><span class="o">=</span><span class="s2">&quot;1 2 3 4&quot;</span>
 $ <span class="nv">list2</span><span class="o">=</span><span class="s2">&quot;a b c d&quot;</span>
-$ <span class="nb">set</span> <span class="k">$(</span>zip <span class="s2">&quot;</span><span class="nv">$list1</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="nv">$list2</span><span class="s2">&quot;</span><span class="k">)</span>
-$ <span class="k">for</span> i in <span class="k">$(</span>seq <span class="m">1</span> <span class="m">4</span><span class="k">)</span><span class="p">;</span> <span class="k">do</span> <span class="se">\</span>
+$ <span class="nb">set</span> <span class="k">$(</span>zip <span class="s2">&quot;</span>$<span class="s2">list1&quot;</span> <span class="s2">&quot;</span>$<span class="s2">list2&quot;</span><span class="k">)</span>
+$ <span class="k">for</span> i in <span class="k">$(</span>seq <span class="m">1</span> 4<span class="k">)</span><span class="p">;</span> <span class="k">do</span> <span class="se">\</span>
     <span class="nb">echo</span> <span class="s2">&quot;processing </span><span class="nv">$1</span><span class="s2"> and </span><span class="nv">$2</span><span class="s2">&quot;</span><span class="p">;</span> <span class="se">\</span>
-    <span class="nb">shift</span> <span class="m">2</span><span class="p">;</span> <span class="se">\</span>
+    <span class="nb">shift</span> 2<span class="p">;</span> <span class="se">\</span>
 <span class="k">done</span>
 processing <span class="m">1</span> and a
 processing <span class="m">2</span> and b
@@ -102,27 +97,27 @@ processing <span class="m">4</span> and d
 <p>It is often not obvious to the beginner how to create variable names out
 of other variables. For example, the name <code>list$i</code> is an illegal variable
 name, so you cannot do:</p>
-<div class="highlight"><pre><span></span>i=1
-list$i=&quot;a b c&quot;
+<div class="highlight"><pre><span class="x">i=1</span>
+<span class="x">list</span><span class="p">$</span><span class="nv">i</span><span class="x">=&quot;a b c&quot;</span>
 </pre></div>
 
 
 <p>What is the way to get around that? The answer is <code>eval</code>, of course!</p>
-<div class="highlight"><pre><span></span>i=1
-eval &quot;list$i=&#39;a b c&#39;&quot;
+<div class="highlight"><pre><span class="x">i=1</span>
+<span class="x">eval &quot;list</span><span class="p">$</span><span class="nv">i</span><span class="x">=&#39;a b c&#39;&quot;</span>
 </pre></div>
 
 
 <p>So our zip function begins like this</p>
-<div class="highlight"><pre><span></span>zip(){
-    nlists=$#
-    for i in $(seq 1 $nlists); do
-        eval &quot;list$i=&#39;$1&#39;&quot;
-        shift
-    done
-    # the input lists are now in the variable named list1, list2....
-    [...]
-}
+<div class="highlight"><pre><span class="x">zip()</span><span class="err">{</span><span class="x"></span>
+<span class="x">    nlists=</span><span class="p">$</span><span class="err">#</span><span class="x"></span>
+<span class="x">    for i in </span><span class="p">$(</span><span class="err">seq</span> <span class="m">1</span> <span class="p">$</span><span class="nv">nlists</span><span class="p">)</span><span class="x">; do</span>
+<span class="x">        eval &quot;list</span><span class="p">$</span><span class="nv">i</span><span class="x">=&#39;</span><span class="p">$</span><span class="x">1&#39;&quot;</span>
+<span class="x">        shift</span>
+<span class="x">    done</span>
+<span class="x">    </span><span class="err">#</span><span class="x"> the input lists are now in the variable named list1, list2....</span>
+<span class="x">    [...]</span>
+<span class="x">}</span>
 </pre></div>
 
 
@@ -130,7 +125,7 @@ eval &quot;list$i=&#39;a b c&#39;&quot;
 to the tuple, and update the list to reflect the tail. The least error
 prone way I have found to extract the first element is to use a printf
 construct</p>
-<div class="highlight"><pre><span></span>$ <span class="nb">printf</span> <span class="s2">&quot;%s\n&quot;</span> a b c d
+<div class="highlight"><pre>$ <span class="nb">printf</span> <span class="s2">&quot;%s\n&quot;</span> a b c d
 a
 b
 c
@@ -141,33 +136,33 @@ d
 <p>This prints all element of the list line by line. One can easily combine
 it with <code>head -n1</code> and <code>tail -n+2</code> to get the head or the tail of the
 list.</p>
-<div class="highlight"><pre><span></span>head=$(printf &#39;%s\n&#39; $list | head -n1)
-tail=$(printf &#39;%s\n&#39; $list | tail -n+2)
+<div class="highlight"><pre><span class="x">head=</span><span class="p">$(</span><span class="err">printf</span> <span class="s1">&#39;%s\n&#39;</span> <span class="p">$</span><span class="nv">list</span> <span class="err">|</span> <span class="err">head</span> <span class="err">-n1</span><span class="p">)</span><span class="x"></span>
+<span class="x">tail=</span><span class="p">$(</span><span class="err">printf</span> <span class="s1">&#39;%s\n&#39;</span> <span class="p">$</span><span class="nv">list</span> <span class="err">|</span> <span class="err">tail</span> <span class="err">-n+</span><span class="m">2</span><span class="p">)</span><span class="x"></span>
 </pre></div>
 
 
 <p>It works more reliably, for example, than using the buitin <code>set</code> to put the
 elements of the list in the argument list <code>$1</code>, <code>$2</code></p>
-<div class="highlight"><pre><span></span>set $list
-head=$1
-shift
-tail=&quot;$*&quot;
+<div class="highlight"><pre><span class="x">set </span><span class="p">$</span><span class="nv">list</span><span class="x"></span>
+<span class="x">head=</span><span class="p">$</span><span class="x">1</span>
+<span class="x">shift</span>
+<span class="x">tail=&quot;</span><span class="p">$</span><span class="x">*&quot;</span>
 </pre></div>
 
 
 <p>Why? The reason is that if the first argument is the string litteral <code>-</code>, set
 will not behave the way we want! The second part of the function therefore
 looks like this, with a bunch of <code>eval</code>s</p>
-<div class="highlight"><pre><span></span>while true; do
-    tuple=&quot;&quot;
-    for i in $(seq 1 $nlists); do
-        eval &quot;[ -z \&quot;\$list$i\&quot; ] &amp;&amp; return 0&quot;
-        eval &quot;head=\$(printf &#39;%s\\n&#39; \$list$i | head -n1)&quot;
-        eval &quot;list$i=\$(printf &#39;%s\\n&#39; \$list$i | tail -n+2)&quot;
-        tuple=&quot;$tuple $head&quot;
-    done
-    echo &quot;$tuple&quot;
-done
+<div class="highlight"><pre><span class="x">while true; do</span>
+<span class="x">    tuple=&quot;&quot;</span>
+<span class="x">    for i in </span><span class="p">$(</span><span class="err">seq</span> <span class="m">1</span> <span class="p">$</span><span class="nv">nlists</span><span class="p">)</span><span class="x">; do</span>
+<span class="x">        eval &quot;[ -z \&quot;\</span><span class="p">$</span><span class="nv">list</span><span class="p">$</span><span class="nv">i</span><span class="x">\&quot; ] &amp;&amp; return 0&quot;</span>
+<span class="x">        eval &quot;head=\</span><span class="p">$(</span><span class="err">printf</span> <span class="s1">&#39;%s\\n&#39;</span> <span class="err">\</span><span class="p">$</span><span class="nv">list</span><span class="p">$</span><span class="nv">i</span> <span class="err">|</span> <span class="err">head</span> <span class="err">-n1</span><span class="p">)</span><span class="x">&quot;</span>
+<span class="x">        eval &quot;list</span><span class="p">$</span><span class="nv">i</span><span class="x">=\</span><span class="p">$(</span><span class="err">printf</span> <span class="s1">&#39;%s\\n&#39;</span> <span class="err">\</span><span class="p">$</span><span class="nv">list</span><span class="p">$</span><span class="nv">i</span> <span class="err">|</span> <span class="err">tail</span> <span class="err">-n+</span><span class="m">2</span><span class="p">)</span><span class="x">&quot;</span>
+<span class="x">        tuple=&quot;</span><span class="p">$</span><span class="nv">tuple</span><span class="x"> </span><span class="p">$</span><span class="nv">head</span><span class="x">&quot;</span>
+<span class="x">    done</span>
+<span class="x">    echo &quot;</span><span class="p">$</span><span class="nv">tuple</span><span class="x">&quot;</span>
+<span class="x">done</span>
 </pre></div>
 
 
@@ -177,18 +172,18 @@ without further <code>echo</code>ing. The devil is in the details, because if
 provided with zero argument, this function will loop forever. However, we
 really want to start looping if and only if there are arguments. This
 could be achieved by changing</p>
-<div class="highlight"><pre><span></span>while true; do
+<div class="highlight"><pre>while true; do
 </pre></div>
 
 
 <p>to</p>
-<div class="highlight"><pre><span></span>while [ $nlists != 0 ]; do
+<div class="highlight"><pre><span class="x">while [ </span><span class="p">$</span><span class="nv">nlists</span><span class="x"> != 0 ]; do</span>
 </pre></div>
 
 
 <p>I don't find this construct very readable, as it makes it look like this
 condition could change during the loops. I'd rather add the check</p>
-<div class="highlight"><pre><span></span>[ $nlist = 0 ] &amp;&amp; return 0
+<div class="highlight"><pre><span class="x">[ </span><span class="p">$</span><span class="nv">nlist</span><span class="x"> = 0 ] &amp;&amp; return 0</span>
 </pre></div>
 
 
@@ -196,24 +191,24 @@ condition could change during the loops. I'd rather add the check</p>
 <h2>The result</h2>
 <p>Here is how the code looks at the end. I think this could be a fun
 interview question!</p>
-<div class="highlight"><pre><span></span>zip(){
-    nlists=$#
-    [ $nlists = 0 ] &amp;&amp; return 0
-    for i in $(seq 1 $nlists); do
-        eval &quot;list$i=&#39;$1&#39;&quot;
-        shift
-    done
-    while true; do
-        tuple=&quot;&quot;
-        for i in $(seq 1 $nlists); do
-            eval &quot;[ -z \&quot;\$list$i\&quot; ] &amp;&amp; return 0&quot;
-            eval &quot;head=\$(printf &#39;%s\\n&#39; \$list$i | head -n1)&quot;
-            eval &quot;list$i=\$(printf &#39;%s\\n&#39; \$list$i | tail -n+2)&quot;
-            tuple=&quot;$tuple $head&quot;
-        done
-        echo &quot;$tuple&quot;
-    done
-}
+<div class="highlight"><pre><span class="x">zip()</span><span class="err">{</span><span class="x"></span>
+<span class="x">    nlists=</span><span class="p">$</span><span class="err">#</span><span class="x"></span>
+<span class="x">    [ </span><span class="p">$</span><span class="nv">nlists</span><span class="x"> = 0 ] &amp;&amp; return 0</span>
+<span class="x">    for i in </span><span class="p">$(</span><span class="err">seq</span> <span class="m">1</span> <span class="p">$</span><span class="nv">nlists</span><span class="p">)</span><span class="x">; do</span>
+<span class="x">        eval &quot;list</span><span class="p">$</span><span class="nv">i</span><span class="x">=&#39;</span><span class="p">$</span><span class="x">1&#39;&quot;</span>
+<span class="x">        shift</span>
+<span class="x">    done</span>
+<span class="x">    while true; do</span>
+<span class="x">        tuple=&quot;&quot;</span>
+<span class="x">        for i in </span><span class="p">$(</span><span class="err">seq</span> <span class="m">1</span> <span class="p">$</span><span class="nv">nlists</span><span class="p">)</span><span class="x">; do</span>
+<span class="x">            eval &quot;[ -z \&quot;\</span><span class="p">$</span><span class="nv">list</span><span class="p">$</span><span class="nv">i</span><span class="x">\&quot; ] &amp;&amp; return 0&quot;</span>
+<span class="x">            eval &quot;head=\</span><span class="p">$(</span><span class="err">printf</span> <span class="s1">&#39;%s\\n&#39;</span> <span class="err">\</span><span class="p">$</span><span class="nv">list</span><span class="p">$</span><span class="nv">i</span> <span class="err">|</span> <span class="err">head</span> <span class="err">-n1</span><span class="p">)</span><span class="x">&quot;</span>
+<span class="x">            eval &quot;list</span><span class="p">$</span><span class="nv">i</span><span class="x">=\</span><span class="p">$(</span><span class="err">printf</span> <span class="s1">&#39;%s\\n&#39;</span> <span class="err">\</span><span class="p">$</span><span class="nv">list</span><span class="p">$</span><span class="nv">i</span> <span class="err">|</span> <span class="err">tail</span> <span class="err">-n+</span><span class="m">2</span><span class="p">)</span><span class="x">&quot;</span>
+<span class="x">            tuple=&quot;</span><span class="p">$</span><span class="nv">tuple</span><span class="x"> </span><span class="p">$</span><span class="nv">head</span><span class="x">&quot;</span>
+<span class="x">        done</span>
+<span class="x">        echo &quot;</span><span class="p">$</span><span class="nv">tuple</span><span class="x">&quot;</span>
+<span class="x">    done</span>
+<span class="x">}</span>
 </pre></div>
 
 
@@ -226,28 +221,28 @@ to achieve this? Let me know in the comments!</p>
                 <section id="article-list">
                     <h2>All posts</h2>
                     <ol>
-                <li><a href="http://blog.chmd.fr/ssh-over-ssl-episode-4-a-haproxy-based-configuration.html" rel="bookmark" title="Permalink to SSH over SSL, episode 4: a HAproxy based configuration">SSH over SSL, episode 4: a HAproxy based configuration</a></li>
-                <li><a href="http://blog.chmd.fr/using-openid-and-the-likes-to-protect-static-content-lighttpd.html" rel="bookmark" title="Permalink to Using openid and the likes to protect static content (lighttpd)">Using openid and the likes to protect static content (lighttpd)</a></li>
-                <li><a href="http://blog.chmd.fr/git-on-lighttpd.html" rel="bookmark" title="Permalink to Git on lighttpd">Git on lighttpd</a></li>
-                <li><a href="http://blog.chmd.fr/jabber-notifications-on-ssh-login.html" rel="bookmark" title="Permalink to Jabber notifications on ssh login">Jabber notifications on ssh login</a></li>
-                <li><a href="http://blog.chmd.fr/choose-your-passphrase-with-a-die.html" rel="bookmark" title="Permalink to Choose your passphrase with a die">Choose your passphrase with a die</a></li>
-                <li><a href="http://blog.chmd.fr/ssh-over-ssl-episode-3-avoiding-using-a-patched-apache.html" rel="bookmark" title="Permalink to SSH over SSL, episode 3: Avoiding using a patched apache.">SSH over SSL, episode 3: Avoiding using a patched apache.</a></li>
-                <li><a href="http://blog.chmd.fr/using-a-shell-version-of-supergenpass-from-vimperatorpentadactyl.html" rel="bookmark" title="Permalink to Using a shell version of supergenpass from vimperator/pentadactyl">Using a shell version of supergenpass from vimperator/pentadactyl</a></li>
-                <li><a href="http://blog.chmd.fr/saving-your-crontab-in-your-dotfiles.html" rel="bookmark" title="Permalink to Saving your crontab in your dotfiles">Saving your crontab in your dotfiles</a></li>
-                <li><a href="http://blog.chmd.fr/notifications-from-google-calendar-on-my-desktop.html" rel="bookmark" title="Permalink to Notifications from google calendar on my desktop">Notifications from google calendar on my desktop</a></li>
-                <li><a href="http://blog.chmd.fr/ssh-over-ssl-episode-2-replacing-proxytunnel-with-socat.html" rel="bookmark" title="Permalink to SSH over SSL, episode 2: replacing proxytunnel with socat">SSH over SSL, episode 2: replacing proxytunnel with socat</a></li>
-                <li><a href="http://blog.chmd.fr/ssh-over-ssl-a-quick-and-minimal-config.html" rel="bookmark" title="Permalink to SSH over SSL, a quick and minimal config.">SSH over SSL, a quick and minimal config.</a></li>
-                <li><a href="http://blog.chmd.fr/de-linteret-de-detacher-des-programmes-de-la-console-sans-screen.html" rel="bookmark" title="Permalink to De l'intérêt de détacher des programmes de la console (sans screen)">De l'intérêt de détacher des programmes de la console (sans screen)</a></li>
-                <li><a href="http://blog.chmd.fr/utilisons-incron-pour-etre-notifies-des-evenements-du-systeme-de-fichiers.html" rel="bookmark" title="Permalink to Utilisons incron pour être notifiés des événements du système de fichiers">Utilisons incron pour être notifiés des événements du système de fichiers</a></li>
-                <li><a href="http://blog.chmd.fr/la-todo-liste-du-pauvre.html" rel="bookmark" title="Permalink to La TODO liste du pauvre">La TODO liste du pauvre</a></li>
-                <li><a href="http://blog.chmd.fr/gerer-ses-plugins-vim-avec-getlatestvimscripts.html" rel="bookmark" title="Permalink to Gérer ses plugins vim avec :GetLatestVimScripts">Gérer ses plugins vim avec :GetLatestVimScripts</a></li>
-                <li><a href="http://blog.chmd.fr/mettre-des-couleurs-un-peu-partout-gcc-diff-grep.html" rel="bookmark" title="Permalink to Mettre des couleurs un peu partout (gcc, diff, grep...)">Mettre des couleurs un peu partout (gcc, diff, grep...)</a></li>
-                <li><a href="http://blog.chmd.fr/faire-un-gif-anime-a-partir-dun-film.html" rel="bookmark" title="Permalink to Faire un gif animé à partir d'un film">Faire un gif animé à partir d'un film</a></li>
+                <li><a href="ssh-over-ssl-episode-4-a-haproxy-based-configuration.html" rel="bookmark" title="Permalink to SSH over SSL, episode 4: a HAproxy based configuration">SSH over SSL, episode 4: a HAproxy based configuration</a></li>
+                <li><a href="using-openid-and-the-likes-to-protect-static-content-lighttpd.html" rel="bookmark" title="Permalink to Using openid and the likes to protect static content (lighttpd)">Using openid and the likes to protect static content (lighttpd)</a></li>
+                <li><a href="git-on-lighttpd.html" rel="bookmark" title="Permalink to Git on lighttpd">Git on lighttpd</a></li>
+                <li><a href="jabber-notifications-on-ssh-login.html" rel="bookmark" title="Permalink to Jabber notifications on ssh login">Jabber notifications on ssh login</a></li>
+                <li><a href="choose-your-passphrase-with-a-die.html" rel="bookmark" title="Permalink to Choose your passphrase with a die">Choose your passphrase with a die</a></li>
+                <li><a href="ssh-over-ssl-episode-3-avoiding-using-a-patched-apache.html" rel="bookmark" title="Permalink to SSH over SSL, episode 3: Avoiding using a patched apache.">SSH over SSL, episode 3: Avoiding using a patched apache.</a></li>
+                <li><a href="using-a-shell-version-of-supergenpass-from-vimperatorpentadactyl.html" rel="bookmark" title="Permalink to Using a shell version of supergenpass from vimperator/pentadactyl">Using a shell version of supergenpass from vimperator/pentadactyl</a></li>
+                <li><a href="saving-your-crontab-in-your-dotfiles.html" rel="bookmark" title="Permalink to Saving your crontab in your dotfiles">Saving your crontab in your dotfiles</a></li>
+                <li><a href="notifications-from-google-calendar-on-my-desktop.html" rel="bookmark" title="Permalink to Notifications from google calendar on my desktop">Notifications from google calendar on my desktop</a></li>
+                <li><a href="ssh-over-ssl-episode-2-replacing-proxytunnel-with-socat.html" rel="bookmark" title="Permalink to SSH over SSL, episode 2: replacing proxytunnel with socat">SSH over SSL, episode 2: replacing proxytunnel with socat</a></li>
+                <li><a href="ssh-over-ssl-a-quick-and-minimal-config.html" rel="bookmark" title="Permalink to SSH over SSL, a quick and minimal config.">SSH over SSL, a quick and minimal config.</a></li>
+                <li><a href="de-linteret-de-detacher-des-programmes-de-la-console-sans-screen.html" rel="bookmark" title="Permalink to De l'intérêt de détacher des programmes de la console (sans screen)">De l'intérêt de détacher des programmes de la console (sans screen)</a></li>
+                <li><a href="utilisons-incron-pour-etre-notifies-des-evenements-du-systeme-de-fichiers.html" rel="bookmark" title="Permalink to Utilisons incron pour être notifiés des événements du système de fichiers">Utilisons incron pour être notifiés des événements du système de fichiers</a></li>
+                <li><a href="la-todo-liste-du-pauvre.html" rel="bookmark" title="Permalink to La TODO liste du pauvre">La TODO liste du pauvre</a></li>
+                <li><a href="gerer-ses-plugins-vim-avec-getlatestvimscripts.html" rel="bookmark" title="Permalink to Gérer ses plugins vim avec :GetLatestVimScripts">Gérer ses plugins vim avec :GetLatestVimScripts</a></li>
+                <li><a href="mettre-des-couleurs-un-peu-partout-gcc-diff-grep.html" rel="bookmark" title="Permalink to Mettre des couleurs un peu partout (gcc, diff, grep...)">Mettre des couleurs un peu partout (gcc, diff, grep...)</a></li>
+                <li><a href="faire-un-gif-anime-a-partir-dun-film.html" rel="bookmark" title="Permalink to Faire un gif animé à partir d'un film">Faire un gif animé à partir d'un film</a></li>
             </ol>
             </section><!-- #article-list -->
 
     <hr />
-    <a href="http://blog.chmd.fr/feeds/all.atom.xml">Atom feed</a></li>
+    <a href="feeds/all.atom.xml">Atom feed</a></li>
 
     <footer id="contentinfo" class="body">
         <address id="about" class="vcard body">
