@@ -1,6 +1,6 @@
 INPUTDIR=source
 CONFFILE=$(INPUTDIR)/pelican.conf.py
-OUTPUTDIR=.
+OUTPUTDIR=docs
 
 all: clean $(OUTPUTDIR)/index.html
 	@echo done
