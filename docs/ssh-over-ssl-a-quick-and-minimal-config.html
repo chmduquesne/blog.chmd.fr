@@ -4,7 +4,7 @@
     <title>SSH over SSL, a quick and minimal config.</title>
     <meta charset="utf-8" />
     <link href="http://blog.chmd.fr/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Ch-M.D Full Atom Feed" />
-    <link href="http://blog.chmd.fr/feeds/howto.atom.xml" type="application/atom+xml" rel="alternate" title="Ch-M.D Categories Atom Feed" />
+    <link href="http://blog.chmd.fr/feeds/{slug}.atom.xml" type="application/atom+xml" rel="alternate" title="Ch-M.D Categories Atom Feed" />
     <link rel="stylesheet" href="theme/css/rdark.css" />
     <link rel="stylesheet" type="text/css" href="theme/css/main.css" />
 </head>
@@ -32,7 +32,7 @@ over the years, so the more recent, the better:</p>
 <li>2011-07-11: <a href="/ssh-over-ssl-episode-3-avoiding-using-a-patched-apache.html">Avoiding using a patched Apache</a></li>
 <li>2014-10-19: <a href="/ssh-over-ssl-episode-4-a-haproxy-based-configuration.html">HAproxy based configuration</a></li>
 </ul>
-<hr />
+<hr>
 <p>So you are behind a vicious firewall that filters outgoing ssh and
 vpn, and the only safe way out is SSL. In this article, I'll
 describe how to SSH over SSL to a machine that runs an ssh server
@@ -55,7 +55,7 @@ Clients will connect using a standard ssh client and proxytunnel.</p>
 </ul>
 <h1>File /etc/apache2/sites-available/default-ssl</h1>
 <p>It's minimalistic on purpose, so you can see what is really needed.</p>
-<div class="highlight"><pre><span class="nt">&lt;IfModule</span> <span class="err">mod_ssl.c</span><span class="nt">&gt;</span>
+<div class="highlight"><pre><span></span><span class="nt">&lt;IfModule</span> <span class="err">mod_ssl.c</span><span class="nt">&gt;</span>
 <span class="nt">&lt;VirtualHost</span> <span class="err">_default_:443</span><span class="nt">&gt;</span>
     # enable ssl
     SSLEngine on
@@ -72,7 +72,7 @@ Clients will connect using a standard ssh client and proxytunnel.</p>
 <p>It enables forward proxying for anyone, but only if the client asks for
 127.0.0.1:22 (other requests will be denied). This results in exposing the
 port 22 (ssh) of your server through a proxy, in an encrypted way.</p>
-<div class="highlight"><pre>ProxyRequests On
+<div class="highlight"><pre><span></span>ProxyRequests On
 AllowConnect 22
 <span class="nt">&lt;Proxy</span> <span class="err">*</span><span class="nt">&gt;</span>
     Order deny,allow
@@ -98,7 +98,7 @@ commenting the three SSL related lines (you can switch to encrypted when
 it works). Proxytunnel can "chain" two proxies (a local one, and a remote
 one), but if the place you connect from does not use such a setting, here
 is how you can proceed:</p>
-<div class="highlight"><pre>proxytunnel -E -p server.com:443 -d 127.0.0.1:22 -v
+<div class="highlight"><pre><span></span><span class="err">proxytunnel -E -p server.com:443 -d 127.0.0.1:22 -v</span>
 </pre></div>
 
 
@@ -110,10 +110,10 @@ using the latest alpha).</p>
 <h1>File .ssh/config</h1>
 <p>Once you're done, just drop the working command line in the .ssh/config of
 your clients:</p>
-<div class="highlight"><pre>Host server.com
-    ProxyCommand proxytunnel -q -E -p server.com:443 -d 127.0.0.1:22
-    DynamicForward 1080
-    ServerAliveInterval 60
+<div class="highlight"><pre><span></span><span class="err">Host server.com</span>
+<span class="err">    ProxyCommand proxytunnel -q -E -p server.com:443 -d 127.0.0.1:22</span>
+<span class="err">    DynamicForward 1080</span>
+<span class="err">    ServerAliveInterval 60</span>
 </pre></div>
 
 

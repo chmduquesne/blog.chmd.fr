@@ -4,7 +4,7 @@
     <title>l'UML automatisé et le libre : c'est pas gagné!</title>
     <meta charset="utf-8" />
     <link href="http://blog.chmd.fr/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Ch-M.D Full Atom Feed" />
-    <link href="http://blog.chmd.fr/feeds/code.atom.xml" type="application/atom+xml" rel="alternate" title="Ch-M.D Categories Atom Feed" />
+    <link href="http://blog.chmd.fr/feeds/{slug}.atom.xml" type="application/atom+xml" rel="alternate" title="Ch-M.D Categories Atom Feed" />
     <link rel="stylesheet" href="theme/css/rdark.css" />
     <link rel="stylesheet" type="text/css" href="theme/css/main.css" />
 </head>
@@ -54,10 +54,10 @@ prend en entrée un schéma uml en dia, et génère du code dans le
 langage choisi. J'ai regardé la section
 <a href="http://dia2code.sourceforge.net/examples.html">examples</a> du site,
 c'est assez convaincant. Pour ce schéma :</p>
-<p><img alt="uml_dia.png" src="images/uml_dia.png" /></p>
+<p><img alt="uml_dia.png" src="images/uml_dia.png"></p>
 <p>Les fichiers suivants seront générés :</p>
 <p>foowindow.cpp 1/14</p>
-<div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&quot;foowindow.h&quot;</span><span class="cp"></span>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;foowindow.h&quot;</span><span class="cp"></span>
 
 <span class="kt">void</span> <span class="n">FooWindow</span><span class="o">::</span><span class="n">redraw</span> <span class="p">(</span>  <span class="p">){</span>
 <span class="p">}</span>
@@ -65,7 +65,7 @@ c'est assez convaincant. Pour ce schéma :</p>
 
 
 <p>foowindow.h 2/14</p>
-<div class="highlight"><pre><span class="cp">#ifndef FOOWINDOW_H</span>
+<div class="highlight"><pre><span></span><span class="cp">#ifndef FOOWINDOW_H</span>
 <span class="cp">#define FOOWINDOW_H</span>
 
 <span class="cp">#include</span> <span class="cpf">&quot;window.h&quot;</span><span class="cp"></span>
@@ -83,12 +83,12 @@ c'est assez convaincant. Pour ce schéma :</p>
 
 
 <p>foowindowmanager.cpp 3/14</p>
-<div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&quot;foowindowmanager.h&quot;</span><span class="cp"></span>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;foowindowmanager.h&quot;</span><span class="cp"></span>
 </pre></div>
 
 
 <p>foowindowmanager.h 4/14</p>
-<div class="highlight"><pre><span class="cp">#ifndef FOOWINDOWMANAGER_H</span>
+<div class="highlight"><pre><span></span><span class="cp">#ifndef FOOWINDOWMANAGER_H</span>
 <span class="cp">#define FOOWINDOWMANAGER_H</span>
 
 <span class="cp">#include</span> <span class="cpf">&quot;windowmanager.h&quot;</span><span class="cp"></span>
@@ -104,7 +104,7 @@ c'est assez convaincant. Pour ce schéma :</p>
 
 
 <p>point.cpp 5/14</p>
-<div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&quot;point.h&quot;</span><span class="cp"></span>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;point.h&quot;</span><span class="cp"></span>
 
 <span class="n">Point</span><span class="o">::</span><span class="n">Point</span> <span class="p">(</span> <span class="kt">float</span> <span class="n">x</span><span class="p">,</span> <span class="kt">float</span> <span class="n">y</span> <span class="p">){</span>
 <span class="p">}</span>
@@ -118,7 +118,7 @@ c'est assez convaincant. Pour ce schéma :</p>
 
 
 <p>point.h 6/14</p>
-<div class="highlight"><pre><span class="cp">#ifndef POINT_H</span>
+<div class="highlight"><pre><span></span><span class="cp">#ifndef POINT_H</span>
 <span class="cp">#define POINT_H</span>
 
 <span class="n">class</span> <span class="n">Point</span> <span class="p">{</span>
@@ -139,7 +139,7 @@ c'est assez convaincant. Pour ce schéma :</p>
 
 
 <p>rectangle.cpp 7/14</p>
-<div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&quot;rectangle.h&quot;</span><span class="cp"></span>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;rectangle.h&quot;</span><span class="cp"></span>
 
 <span class="kt">float</span> <span class="n">Rectangle</span><span class="o">::</span><span class="n">getArea</span> <span class="p">(</span>  <span class="p">){</span>
 <span class="p">}</span>
@@ -147,7 +147,7 @@ c'est assez convaincant. Pour ce schéma :</p>
 
 
 <p>rectangle.h 8/14</p>
-<div class="highlight"><pre><span class="cp">#ifndef RECTANGLE_H</span>
+<div class="highlight"><pre><span></span><span class="cp">#ifndef RECTANGLE_H</span>
 <span class="cp">#define RECTANGLE_H</span>
 
 <span class="cp">#include</span> <span class="cpf">&quot;point.h&quot;</span><span class="cp"></span>
@@ -167,12 +167,12 @@ c'est assez convaincant. Pour ce schéma :</p>
 
 
 <p>shape.cpp 9/14</p>
-<div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&quot;shape.h&quot;</span><span class="cp"></span>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;shape.h&quot;</span><span class="cp"></span>
 </pre></div>
 
 
 <p>shape.h 10/14</p>
-<div class="highlight"><pre><span class="cp">#ifndef SHAPE_H</span>
+<div class="highlight"><pre><span></span><span class="cp">#ifndef SHAPE_H</span>
 <span class="cp">#define SHAPE_H</span>
 
 <span class="n">class</span> <span class="n">Shape</span> <span class="p">{</span>
@@ -188,12 +188,12 @@ c'est assez convaincant. Pour ce schéma :</p>
 
 
 <p>window.cpp 11/14</p>
-<div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&quot;window.h&quot;</span><span class="cp"></span>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;window.h&quot;</span><span class="cp"></span>
 </pre></div>
 
 
 <p>window.h 12/14</p>
-<div class="highlight"><pre><span class="cp">#ifndef WINDOW_H</span>
+<div class="highlight"><pre><span></span><span class="cp">#ifndef WINDOW_H</span>
 <span class="cp">#define WINDOW_H</span>
 
 <span class="cp">#include</span> <span class="cpf">&quot;shape.h&quot;</span><span class="cp"></span>
@@ -213,12 +213,12 @@ c'est assez convaincant. Pour ce schéma :</p>
 
 
 <p>windowmanager.cpp 13/14</p>
-<div class="highlight"><pre><span class="cp">#include</span> <span class="cpf">&quot;windowmanager.h&quot;</span><span class="cp"></span>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;windowmanager.h&quot;</span><span class="cp"></span>
 </pre></div>
 
 
 <p>windowmanager.h 14/14</p>
-<div class="highlight"><pre><span class="cp">#ifndef WINDOWMANAGER_H</span>
+<div class="highlight"><pre><span></span><span class="cp">#ifndef WINDOWMANAGER_H</span>
 <span class="cp">#define WINDOWMANAGER_H</span>
 
 <span class="cp">#include</span> <span class="cpf">&quot;window.h&quot;</span><span class="cp"></span>
